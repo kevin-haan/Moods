@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  nginx:
+    build: ./gateway/nginx
+    ports:
+      - "8080:80"
+
+  #  authentication-service:
+#    build: ./backend/services/authentication
+#    ports:
+#      - "3006:3000"
+#    environment:
+#      - DB_URL=mongodb://mongo:27018/auth
+#    depends_on:
+#      - mongo
+
+  mood-tracking-service:
+    build: ./backend/services/mood-tracking
+    ports:
+      - "3007:3000"
+    environment:
+      - DB_URL=mongodb://mongo:27017/data
+    depends_on:
+      - mongo
+#
+#  statistics-service:
+#    build: ./backend/services/statistics
+#    ports:
+#      - "3008:3000"
+#    depends_on:
+#      - mood-tracking-service
+
+  mongo:
+    image: mongo
+    ports:
+      - "27018:27018"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

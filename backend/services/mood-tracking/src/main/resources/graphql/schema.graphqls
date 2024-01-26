@@ -1,0 +1,19 @@
+type Query {
+    mood(id: ID!): Mood
+    moods: [Mood]
+}
+
+type Mutation {
+    createMood(input: MoodInput!): Mood
+}
+
+type Mood {
+    id: ID!
+    name: String
+    description: String
+}
+
+input MoodInput {
+    name: String
+    description: String
+}

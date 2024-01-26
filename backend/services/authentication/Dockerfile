@@ -1,0 +1,12 @@
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY ../../backend/services/authentication .
+
+EXPOSE 3006
+
+CMD ["node", "app.js"]
